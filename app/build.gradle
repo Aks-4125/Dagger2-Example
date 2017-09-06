@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+    defaultConfig {
+        applicationId "com.example.akashb.demoapp"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.dagger/dagger/pom.properties'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/maven/com.google.dagger/dagger/pom.xml'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    Map<String, String> dependencies = rootProject.ext.dependencies
+    //support
+    compile dependencies.appCompat
+    compile dependencies.recyclerView
+    compile dependencies.cardView
+    compile dependencies.designSupport
+    compile dependencies.support
+
+    // rx
+    compile dependencies.rxJava
+    compile dependencies.rxAndroid
+    compile dependencies.rxBinding
+
+    // butterknife
+    compile dependencies.butterknife
+    annotationProcessor dependencies.butterknifecompiler
+
+    // dagger
+    compile dependencies.dagger
+    annotationProcessor dependencies.daggerCompiler
+    provided dependencies.javaxAnnotation
+    compile dependencies.javax
+
+    //constraintLayout
+    compile dependencies.constraintLayout
+
+
+    compile 'com.google.firebase:firebase-messaging:11.0.4'
+}
+
+
+apply plugin: 'com.google.gms.google-services'
