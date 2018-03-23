@@ -1,2 +1,2 @@
-# TempArchitecture
+# Dagger2 Sample
 Android
